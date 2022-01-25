@@ -1,0 +1,30 @@
+{
+  "name": "pixelplan-digitalweb/messenger-job-batch-bundle",
+  "description": "Allow to track when a job batch has finished",
+  "type": "symfony-bundle",
+  "homepage": "https://pixelplan.net",
+  "require": {
+    "php": ">=7.4|^8.0",
+    "symfony/framework-bundle": "^5.4",
+    "symfony/lock": "^5.4",
+    "symfony/uid": "^5.4",
+    "symfony/messenger": "^5.4",
+    "psr/cache": "^1.0|^2.0",
+    "psr/log": "^1|^2|^3"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^1.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "Pixelplan\\MessengerJobBatchBundle\\": "src/"
+    }
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Diogo Pinheiro",
+      "email": "diogo.pinheiro@pixelplan.net"
+    }
+  ]
+}
