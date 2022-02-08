@@ -1,5 +1,5 @@
 {
-  "name": "pixelplan-digitalweb/messenger-job-batch-bundle",
+  "name": "pixelplan/messenger-job-batch-bundle",
   "description": "Allow to track when a job batch has finished",
   "type": "symfony-bundle",
   "homepage": "https://pixelplan.net",
