@@ -14,12 +14,4 @@ final class MessengerJobBatchBundle extends Bundle
     {
         $container->addCompilerPass(new MessengerJobBatchCompilerPass());
     }
-
-//    public function getContainerExtension(): ExtensionInterface
-//    {
-//        if (null === $this->extension) {
-//            $this->extension = new MessengerJobBatchExtension();
-//        }
-//        return $this->extension;
-//    }
 }
