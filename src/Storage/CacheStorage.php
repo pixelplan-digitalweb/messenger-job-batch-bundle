@@ -31,11 +31,11 @@ final class CacheStorage implements StorageInterface
         $cacheItem = $this->pool->getItem($this->getKey($jobBatchId));
         $value = $cacheItem->get();
 
-        if ($value instanceof JobBatch) {
-            return $value;
+        if (!$value instanceof JobBatch) {
+            throw JobBatchNotFound::byId($jobBatchId);
         }
 
-        throw JobBatchNotFound::byId($jobBatchId);
+        return $value;
     }
 
     public function delete(JobBatchId $jobBatchId): void
