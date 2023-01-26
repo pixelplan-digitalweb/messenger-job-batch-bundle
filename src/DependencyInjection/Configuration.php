@@ -19,11 +19,11 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('lock_factory')
                     ->info('The service ID of the lock factory used by this job batch processor')
-                    ->defaultValue('lock.factory')
+                    ->defaultValue('lock.factory.abstract')
                 ->end()
                 ->scalarNode('cache_pool')
                     ->info('The cache pool to use for storing the current job batch state')
-                    ->defaultValue('cache.messenger_job_batch')
+                    ->defaultValue('cache.app')
                 ->end()
             ->end()
         ;
