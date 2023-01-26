@@ -4,7 +4,8 @@ namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Pixelplan\MessengerJobBatchBundle\EventSubscriber\WorkerMessageSubscriber;
 use Pixelplan\MessengerJobBatchBundle\JobBatch\JobBatchManager;
-use Pixelplan\MessengerJobBatchBundle\Messenger\JobBatchMessageBus;
+use Pixelplan\MessengerJobBatchBundle\Messenger\Contracts\JobBatchMessageBusFactoryInterface;
+use Pixelplan\MessengerJobBatchBundle\Messenger\Contracts\JobBatchMessageBusInterface;
 use Pixelplan\MessengerJobBatchBundle\Messenger\JobBatchMessageBusFactory;
 use Pixelplan\MessengerJobBatchBundle\Messenger\JobBatchHandlerInterface;
 use Pixelplan\MessengerJobBatchBundle\Messenger\JobBatchMiddleware;
@@ -50,9 +51,9 @@ return static function (ContainerConfigurator $container) {
             ->parent('cache.app')
             ->tag('cache.pool')
 
-        ->alias(JobBatchMessageBus::class, 'pixelplan_messenger_job_batch.batch_message_bus')
+        ->alias(JobBatchMessageBusInterface::class, 'pixelplan_messenger_job_batch.batch_message_bus')
         ->alias(JobBatchManager::class, 'pixelplan_messenger_job_batch.job_batch_manager')
         ->alias(JobBatchMiddleware::class, 'pixelplan_messenger_job_batch.batch_middleware')
-        ->alias(JobBatchMessageBusFactory::class, 'pixelplan_messenger_job_batch.batch_message_bus_factory')
+        ->alias(JobBatchMessageBusFactoryInterface::class, 'pixelplan_messenger_job_batch.batch_message_bus_factory')
     ;
 };

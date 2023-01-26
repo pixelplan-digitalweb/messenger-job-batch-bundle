@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Pixelplan\MessengerJobBatchBundle\Messenger;
 
 use Pixelplan\MessengerJobBatchBundle\JobBatch\JobBatchManager;
+use Pixelplan\MessengerJobBatchBundle\Messenger\Contracts\JobBatchMessageBusInterface;
 use Pixelplan\MessengerJobBatchBundle\Messenger\Stamp\JobBatchStamp;
 use Pixelplan\MessengerJobBatchBundle\Model\JobBatch;
 use Psr\Log\LoggerInterface;
@@ -12,7 +13,7 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Exception;
 use ReflectionClass;
 
-final class JobBatchMessageBus
+final class JobBatchMessageBus implements JobBatchMessageBusInterface
 {
     private JobBatchManager $jobBatchManager;
 
