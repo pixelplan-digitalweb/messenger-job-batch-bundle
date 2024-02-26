@@ -23,7 +23,7 @@ final class JobBatch
     /**
      * @var array<mixed>
      */
-    private array $context;
+    private array $context = [];
 
     private DateTimeImmutable $createdAt;
 
