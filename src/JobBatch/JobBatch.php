@@ -12,11 +12,6 @@ final class JobBatch
 
     private string $name;
 
-    /**
-     * @var array<mixed>
-     */
-    private array $context;
-
     private int $totalJobs;
 
     private int $pendingJobs;
@@ -25,20 +20,25 @@ final class JobBatch
 
     private string $handlerClass;
 
+    /**
+     * @var array<mixed>
+     */
+    private array $context;
+
     private DateTimeImmutable $createdAt;
 
     /**
      * @param array<mixed> $context
      */
-    public function __construct(JobBatchId $jobId, string $name, array $context, int $totalJobs, string $handlerClass, DateTimeImmutable $createdAt)
+    public function __construct(JobBatchId $jobId, string $name, int $totalJobs, string $handlerClass, array $context, DateTimeImmutable $createdAt)
     {
         $this->id = $jobId;
-        $this->name = $name;
-        $this->context = $context;        
+        $this->name = $name; 
         $this->totalJobs = $totalJobs;
         $this->pendingJobs = $totalJobs;
         $this->failedJobs = 0;
         $this->handlerClass = $handlerClass;
+        $this->context = $context;        
         $this->createdAt = $createdAt;
     }
 
