@@ -33,7 +33,7 @@ final class JobBatch
     public function __construct(JobBatchId $jobId, string $name, int $totalJobs, string $handlerClass, array $context, DateTimeImmutable $createdAt)
     {
         $this->id = $jobId;
-        $this->name = $name; 
+        $this->name = $name;
         $this->totalJobs = $totalJobs;
         $this->pendingJobs = $totalJobs;
         $this->failedJobs = 0;
