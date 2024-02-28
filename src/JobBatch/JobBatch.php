@@ -20,9 +20,17 @@ final class JobBatch
 
     private string $handlerClass;
 
+    /**
+     * @var array<mixed>
+     */
+    private array $context = [];
+
     private DateTimeImmutable $createdAt;
 
-    public function __construct(JobBatchId $jobId, string $name, int $totalJobs, string $handlerClass, DateTimeImmutable $createdAt)
+    /**
+     * @param array<mixed> $context
+     */
+    public function __construct(JobBatchId $jobId, string $name, int $totalJobs, string $handlerClass, array $context, DateTimeImmutable $createdAt)
     {
         $this->id = $jobId;
         $this->name = $name;
@@ -30,6 +38,7 @@ final class JobBatch
         $this->pendingJobs = $totalJobs;
         $this->failedJobs = 0;
         $this->handlerClass = $handlerClass;
+        $this->context = $context;        
         $this->createdAt = $createdAt;
     }
 
@@ -76,5 +85,13 @@ final class JobBatch
     public function getHandlerClass(): string
     {
         return $this->handlerClass;
+    }
+
+    /**
+     * @return array<mixed>
+     */
+    public function getContext(): array
+    {
+        return $this->context;
     }
 }

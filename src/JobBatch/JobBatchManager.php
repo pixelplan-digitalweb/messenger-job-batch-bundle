@@ -27,10 +27,13 @@ final class JobBatchManager implements LoggerAwareInterface
         $this->logger = new NullLogger();
     }
 
-    public function create(string $name, int $totalJobs, string $handlerClass): JobBatch
+    /**
+     * @param array<mixed> $context
+     */
+    public function create(string $name, int $totalJobs, string $handlerClass, array $context): JobBatch
     {
         $jobBatchId = JobBatchIdGenerator::new();
-        $jobBatch = new JobBatch($jobBatchId, $name, $totalJobs, $handlerClass, new DateTimeImmutable());
+        $jobBatch = new JobBatch($jobBatchId, $name, $totalJobs, $handlerClass, $context, new DateTimeImmutable());
 
         $this->lock->acquire(true);
 

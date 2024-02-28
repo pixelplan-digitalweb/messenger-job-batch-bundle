@@ -27,12 +27,13 @@ final class JobBatchMessageBus implements JobBatchMessageBusInterface
 
     /**
      * @param array<mixed> $messages
+     * @param array<mixed> $context
      */
-    public function dispatchJobBatch(string $name, array $messages, string $handlerClass): void
+    public function dispatchJobBatch(string $name, array $messages, string $handlerClass, array $context = []): void
     {
         $this->validateHandlerClass($handlerClass);
 
-        $jobBatch = $this->jobBatchManager->create($name, count($messages), $handlerClass);
+        $jobBatch = $this->jobBatchManager->create($name, count($messages), $handlerClass, $context);
 
         foreach ($messages as $message) {
             $this->messageBus->dispatch($message, [
