@@ -8,7 +8,7 @@ interface JobBatchMessageBusInterface
 {
     /**
      * @param array<mixed> $messages
-     * @param array<mixed> context
+     * @param array<mixed> $context
      */
     public function dispatchJobBatch(string $name, array $messages, string $handlerClass, array $context = []): void;
 }

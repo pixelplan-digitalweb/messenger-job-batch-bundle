@@ -19,6 +19,11 @@ final class MessengerJobBatchExtension extends Extension
         $loader->load('services.php');
 
         $configuration = $this->getConfiguration($configs, $container);
+
+        if($configuration === null) {
+            return;
+        }
+
         $config = $this->processConfiguration($configuration, $configs);
 
         $definition = $container->getDefinition('pixelplan_messenger_job_batch.cache_storage');

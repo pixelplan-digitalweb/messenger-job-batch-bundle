@@ -113,13 +113,13 @@ final class WorkerMessageSubscriber implements EventSubscriberInterface, LoggerA
         $jobBatchHandler = $this->getJobBatchHandler($jobBatch);
 
         if ($finishedSuccessfully) {
-            $this->logger->info('Job batch "{jobBatchName}" ({jobBatchId}) finished successfully.', [
+            $this->info('Job batch "{jobBatchName}" ({jobBatchId}) finished successfully.', [
                 'jobBatchId' => $jobBatch->getId()->toString(),
                 'jobBatchName' => $jobBatch->getName(),
             ]);
             $jobBatchHandler->jobBatchSuccessful($jobBatch);
         } else {
-            $this->logger->info('Job batch "{jobBatchName}" ({jobBatchId}) finished with errors.', [
+            $this->info('Job batch "{jobBatchName}" ({jobBatchId}) finished with errors.', [
                 'jobBatchId' => $jobBatch->getId()->toString(),
                 'jobBatchName' => $jobBatch->getName(),
             ]);
@@ -138,5 +138,17 @@ final class WorkerMessageSubscriber implements EventSubscriberInterface, LoggerA
         }
 
         throw new \RuntimeException('Handler not found.');
+    }
+
+    /**
+     * @param array<mixed> $context
+     */
+    public function info(string $message, array $context): void
+    {
+        if($this->logger === null){
+            return;
+        }
+
+        $this->logger->info($message, $context);
     }
 }

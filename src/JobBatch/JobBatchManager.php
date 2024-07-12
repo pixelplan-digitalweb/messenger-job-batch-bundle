@@ -39,7 +39,7 @@ final class JobBatchManager implements LoggerAwareInterface
 
         try {
             $this->storage->save($jobBatch);
-            $this->logger->debug('Created new job batch with id "{jobBatchId}" having {totalJobs} jobs.', ['jobBatchId' => $jobBatchId->toString(), 'totalJobs' => $totalJobs]);
+            $this->debug('Created new job batch with id "{jobBatchId}" having {totalJobs} jobs.', ['jobBatchId' => $jobBatchId->toString(), 'totalJobs' => $totalJobs]);
         } finally {
             $this->lock->release();
         }
@@ -56,7 +56,7 @@ final class JobBatchManager implements LoggerAwareInterface
             $jobBatch->decreasePendingJobs();
             $this->storage->save($jobBatch);
 
-            $this->logger->debug('[{completed}/{total}] Job belonging to "{jobBatchId}" handled successful.', [
+            $this->debug('[{completed}/{total}] Job belonging to "{jobBatchId}" handled successful.', [
                 'completed' => $jobBatch->getTotalCompletedJobs(),
                 'total' => $jobBatch->getTotalJobs(),
                 'jobBatchId' => $jobBatchId->toString()
@@ -78,7 +78,7 @@ final class JobBatchManager implements LoggerAwareInterface
             $jobBatch->increaseFailedJobs();
             $this->storage->save($jobBatch);
 
-            $this->logger->debug('[{completed}/{total}] Job belonging to "{jobBatchId}" handled failed.', [
+            $this->debug('[{completed}/{total}] Job belonging to "{jobBatchId}" handled failed.', [
                 'completed' => $jobBatch->getTotalCompletedJobs(),
                 'total' => $jobBatch->getTotalJobs(),
                 'jobBatchId' => $jobBatchId->toString()
@@ -96,9 +96,21 @@ final class JobBatchManager implements LoggerAwareInterface
 
         try {
             $this->storage->delete($jobBatchId);
-            $this->logger->debug('Job batch "{jobBatchId}" removed.', ['jobBatchId' => $jobBatchId->toString()]);
+            $this->debug('Job batch "{jobBatchId}" removed.', ['jobBatchId' => $jobBatchId->toString()]);
         } finally {
             $this->lock->release();
         }
+    }
+
+    /**
+     * @param array<mixed> $context
+     */
+    public function debug(string $message, array $context): void
+    {
+        if ($this->logger === null) {
+            return;
+        }
+
+        $this->logger->debug($message, $context);
     }
 }
