@@ -94,4 +94,9 @@ final class JobBatch
     {
         return $this->context;
     }
+
+    public function getCreatedAt(): DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
 }
