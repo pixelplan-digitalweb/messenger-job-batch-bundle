@@ -22,5 +22,10 @@ final class MessengerJobBatchCompilerPass implements CompilerPassInterface
         }
 
         $definition->setArgument(0, $jobBatchMessageHandlerReferences);
+
+        $container->register('Pixelplan\MessengerJobBatchBundle\Messenger\JobBatchMiddleware')
+            ->setClass('Pixelplan\MessengerJobBatchBundle\Messenger\JobBatchMiddleware')
+            ->setArguments([new Reference('Pixelplan\MessengerJobBatchBundle\JobBatch\JobBatchManager')])
+            ->addTag('messenger.middleware');
     }
 }
