@@ -43,6 +43,11 @@ final class CacheStorage implements StorageInterface
         $this->pool->deleteItem($this->getKey($jobBatchId));
     }
 
+    public function exists(JobBatchId $jobBatchId): bool
+    {
+        return $this->pool->hasItem($this->getKey($jobBatchId));
+    }
+
     private function getKey(JobBatchId $jobBatchId): string
     {
         return $jobBatchId->toString();

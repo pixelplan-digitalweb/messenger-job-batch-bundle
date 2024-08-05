@@ -18,4 +18,6 @@ interface StorageInterface
     public function fetch(JobBatchId $jobBatchId): JobBatch;
 
     public function delete(JobBatchId $jobBatchId): void;
+
+    public function exists(JobBatchId $jobBatchId): bool;
 }
