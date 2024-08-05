@@ -97,7 +97,11 @@ final class WorkerMessageSubscriber implements EventSubscriberInterface, LoggerA
             return;
         }
 
-        $jobBatch = $this->jobBatchManager->batchJobHandledWithFailure($jobBatchStamp->getJobBatchId());
+        try {
+            $jobBatch = $this->jobBatchManager->batchJobHandledWithFailure($jobBatchStamp->getJobBatchId());
+        } catch (JobBatchNotFound) {
+            return;
+        }
 
         if (!$jobBatch->hasFinished()) {
             // the job batch is still running

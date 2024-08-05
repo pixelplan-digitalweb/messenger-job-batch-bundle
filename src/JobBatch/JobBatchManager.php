@@ -102,6 +102,11 @@ final class JobBatchManager implements LoggerAwareInterface
         }
     }
 
+    public function exists(JobBatchId $jobBatchId): bool
+    {
+        return $this->storage->exists($jobBatchId);
+    }
+
     /**
      * @param array<mixed> $context
      */
