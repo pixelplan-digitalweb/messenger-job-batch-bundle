@@ -9,6 +9,7 @@ use Pixelplan\MessengerJobBatchBundle\JobBatch\JobBatchManager;
 use Pixelplan\MessengerJobBatchBundle\Messenger\JobBatchHandlerInterface;
 use Pixelplan\MessengerJobBatchBundle\Messenger\Stamp\JobBatchStamp;
 use Pixelplan\MessengerJobBatchBundle\Repository\JobRepository;
+use Pixelplan\MessengerJobBatchBundle\Storage\Exception\JobBatchNotFound;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
@@ -65,7 +66,11 @@ final class WorkerMessageSubscriber implements EventSubscriberInterface, LoggerA
             return;
         }
 
-        $jobBatch = $this->jobBatchManager->batchJobHandledWithSuccess($jobBatchStamp->getJobBatchId());
+        try {
+            $jobBatch = $this->jobBatchManager->batchJobHandledWithSuccess($jobBatchStamp->getJobBatchId());
+        } catch (JobBatchNotFound) {
+            return;
+        }
 
         if (!$jobBatch->hasFinished()) {
             // the job batch is still running
