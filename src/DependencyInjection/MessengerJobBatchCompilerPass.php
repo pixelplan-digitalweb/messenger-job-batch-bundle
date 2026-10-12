@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class MessengerJobBatchCompilerPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $definition = $container->getDefinition('pixelplan_messenger_job_batch.worker_message_subscriber');
 
